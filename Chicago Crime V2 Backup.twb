@@ -2637,8 +2637,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='148' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98934' id='147' param='vert' type-v2='layout-flow' w='99112' x='444' y='533'>
+            <zone h='100000' id='152' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98934' id='151' param='vert' type-v2='layout-flow' w='99112' x='444' y='533'>
                 <zone forceUpdate='true' h='2067' id='13' type-v2='text' w='99112' x='444' y='533'>
                   <formatted-text>
                     <run fontcolor='#333333' fontsize='12'>1. How did Chicago&apos;s reported crime cases develop from 2014 to 2016?</run>
@@ -2724,7 +2724,7 @@
       </cards>
       <simple-id uuid='{F1D73441-50DC-4BD0-85B6-21843BCACAE2}' />
     </window>
-    <window class='worksheet' maximized='true' name='Registered crimes by month'>
+    <window class='worksheet' name='Registered crimes by month'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -2936,7 +2936,7 @@
       </viewpoint>
       <simple-id uuid='{D6603FCD-573E-4D3A-9B04-192898AAF0F3}' />
     </window>
-    <window class='worksheet' name='Type of crime changes'>
+    <window class='worksheet' maximized='true' name='Type of crime changes'>
       <cards>
         <edge name='left'>
           <strip size='160'>
