@@ -698,6 +698,9 @@
         </metadata-records>
       </connection>
       <aliases enabled='yes' />
+      <column caption='# Decreased Crime' datatype='integer' name='[# Increased Crime (copy)_5176465566256156675]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='COUNT(IF [Calculation_4269482822126948352] &lt; 0 THEN 1 END)' />
+      </column>
       <column caption='# Cases x Previous Year' datatype='integer' name='[6 2015 All Cases (copy)_4870150422777331713]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='{ &#10;FIXED [Community Area] : &#10;    SUM(&#10;    IF [Parameters].[Parameter 1] = &apos;All&apos; Then [Calculation_3620049681770532864] &#10;    ELSEIF YEAR([Date]) = INT([Parameters].[Parameter 1]) - 1 THEN [Calculation_3620049681770532864]&#10;    ELSE 0&#10;    END&#10;)    &#10;}' />
       </column>
@@ -717,7 +720,7 @@
       <column caption='# Cases x Selected Year' datatype='integer' name='[Calculation_4197706703051902976]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='{ FIXED [Community Area] : SUM(IF YEAR([Date]) = INT([Parameters].[Parameter 1]) THEN [Calculation_3620049681770532864] &#10;ELSEIF [Parameters].[Parameter 1] = &apos;All&apos; then [Calculation_3620049681770532864] END) }' />
       </column>
-      <column caption='# Y2Y Community Crime' datatype='real' name='[Calculation_4269482822126948352]' role='measure' type='quantitative'>
+      <column caption='% Y2Y Community Crime' datatype='real' name='[Calculation_4269482822126948352]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='If [6 2015 All Cases (copy)_4870150422777331713] != 0&#10;then ([Calculation_4197706703051902976] - [6 2015 All Cases (copy)_4870150422777331713]) / [6 2015 All Cases (copy)_4870150422777331713]&#10;ELSE&#10;NULL&#10;END' />
       </column>
       <column caption='Case Baseline Comparison' datatype='real' name='[Calculation_4365817632956133377]' role='measure' type='quantitative'>
@@ -725,6 +728,12 @@
       </column>
       <column caption='Arrested Tags' datatype='string' name='[Calculation_4439845551870099456]' role='dimension' type='nominal'>
         <calculation class='tableau' formula='IF [Arrest] = TRUE THEN &apos;Yes&apos;&#10;Else &apos;No&apos;&#10;END' />
+      </column>
+      <column caption='# Community Crime Increase' datatype='integer' name='[Calculation_5176465566254170112]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [Calculation_4269482822126948352] &gt; 0&#10;then 1&#10;END' />
+      </column>
+      <column caption='# Increased Crime' datatype='integer' name='[Calculation_5176465566255095810]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='COUNT(IF [Calculation_4269482822126948352] &gt; 0 THEN 1 END)' />
       </column>
       <column aggregation='Sum' datatype='real' name='[Community Area]' role='dimension' type='ordinal' />
       <column datatype='integer' name='[ID]' role='dimension' type='ordinal' />
@@ -1448,7 +1457,7 @@
             <column caption='# Cases x Selected Year' datatype='integer' name='[Calculation_4197706703051902976]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='{ FIXED [Community Area] : SUM(IF YEAR([Date]) = INT([Parameters].[Parameter 1]) THEN [Calculation_3620049681770532864] &#10;ELSEIF [Parameters].[Parameter 1] = &apos;All&apos; then [Calculation_3620049681770532864] END) }' />
             </column>
-            <column caption='# Y2Y Community Crime' datatype='real' name='[Calculation_4269482822126948352]' role='measure' type='quantitative'>
+            <column caption='% Y2Y Community Crime' datatype='real' name='[Calculation_4269482822126948352]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='If [6 2015 All Cases (copy)_4870150422777331713] != 0&#10;then ([Calculation_4197706703051902976] - [6 2015 All Cases (copy)_4870150422777331713]) / [6 2015 All Cases (copy)_4870150422777331713]&#10;ELSE&#10;NULL&#10;END' />
             </column>
             <column caption='Case Baseline Comparison' datatype='real' name='[Calculation_4365817632956133377]' role='measure' type='quantitative'>
@@ -1633,7 +1642,7 @@
             <column caption='# Cases x Selected Year' datatype='integer' name='[Calculation_4197706703051902976]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='{ FIXED [Community Area] : SUM(IF YEAR([Date]) = INT([Parameters].[Parameter 1]) THEN [Calculation_3620049681770532864] &#10;ELSEIF [Parameters].[Parameter 1] = &apos;All&apos; then [Calculation_3620049681770532864] END) }' />
             </column>
-            <column caption='# Y2Y Community Crime' datatype='real' name='[Calculation_4269482822126948352]' role='measure' type='quantitative'>
+            <column caption='% Y2Y Community Crime' datatype='real' name='[Calculation_4269482822126948352]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='If [6 2015 All Cases (copy)_4870150422777331713] != 0&#10;then ([Calculation_4197706703051902976] - [6 2015 All Cases (copy)_4870150422777331713]) / [6 2015 All Cases (copy)_4870150422777331713]&#10;ELSE&#10;NULL&#10;END' />
             </column>
             <column aggregation='Sum' datatype='real' name='[Community Area]' role='dimension' type='ordinal' />
@@ -1768,6 +1777,126 @@
         <cols>[federated.1weigfr03157ul1eu0dyt1bny3v7].[:Measure Names]</cols>
       </table>
       <simple-id uuid='{34FEBD96-5DC6-4340-A8D7-81E679EF8E80}' />
+    </worksheet>
+    <worksheet name='Increase/reduction of crime y2y by community'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Crimes in Chicago Final Interview' name='federated.1weigfr03157ul1eu0dyt1bny3v7' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1weigfr03157ul1eu0dyt1bny3v7'>
+            <column aggregation='Sum' datatype='real' name='[Community Area]' role='dimension' type='ordinal' />
+            <column-instance column='[Community Area]' derivation='None' name='[none:Community Area:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:Community Area:ok]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:Community Area:ok]' member='1.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='2.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='3.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='4.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='5.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='6.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='7.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='8.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='9.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='10.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='11.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='12.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='13.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='14.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='15.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='16.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='17.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='18.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='19.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='20.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='21.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='22.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='23.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='24.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='25.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='26.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='27.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='28.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='29.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='30.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='31.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='32.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='33.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='34.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='35.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='36.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='37.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='38.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='39.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='40.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='41.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='42.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='43.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='44.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='45.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='46.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='47.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='48.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='49.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='50.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='51.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='52.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='53.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='54.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='55.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='56.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='57.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='58.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='59.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='60.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='61.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='62.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='63.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='64.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='65.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='66.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='67.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='68.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='69.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='70.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='71.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='72.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='73.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='74.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='75.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='76.0' />
+              <groupfilter function='member' level='[none:Community Area:ok]' member='77.0' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:Community Area:ok]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{591F12A0-04CA-49C4-B81E-13BF37D7D799}' />
     </worksheet>
     <worksheet name='Registered crimes by month'>
       <layout-options>
@@ -3260,8 +3389,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='800' minheight='800' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='48' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98934' id='47' param='vert' type-v2='layout-flow' w='99112' x='444' y='533'>
+            <zone h='100000' id='52' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98934' id='51' param='vert' type-v2='layout-flow' w='99112' x='444' y='533'>
                 <zone forceUpdate='true' h='2067' id='13' type-v2='text' w='99112' x='444' y='533'>
                   <formatted-text>
                     <run fontcolor='#333333' fontsize='12'>1. How did Chicago&apos;s reported crime cases develop from 2014 to 2016?</run>
@@ -3612,7 +3741,7 @@
       </cards>
       <simple-id uuid='{A5A8CEDF-6B13-4982-8BC7-3FD556F26C71}' />
     </window>
-    <window class='worksheet' maximized='true' name='Community based crime development'>
+    <window class='worksheet' name='Community based crime development'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -3647,6 +3776,42 @@
         </highlight>
       </viewpoint>
       <simple-id uuid='{F5ABCC0A-41C3-40D9-8780-9AA8BCAAFE1C}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Increase/reduction of crime y2y by community'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='compact' param='[Parameters].[Parameter 1]' type='parameter' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:# Community Crime Increase (copy)_5176465566254469121:nk]</field>
+            <field>[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:Community Area:ok]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{2110920F-7060-4E33-8AA8-49EAD110F9E0}' />
     </window>
     <window class='dashboard' name='Dashboard 1'>
       <viewpoints>
@@ -6072,6 +6237,77 @@
       BCCEEBolCUAIITRKEoAQQmiUJAAhhNAoSQBCCKFRkgCEEEKjJAEIIYRGSQIQQgiNkgQghBAa
       JQlACCE0ShKAEEJolCQAIYTQKEkAQgihUZIAhBBCoyQBCCGERv3/sEgejVxzLiUAAAAASUVO
       RK5CYII=
+    </thumbnail>
+    <thumbnail height='384' name='Increase/reduction of crime y2y by community' width='384'>
+      iVBORw0KGgoAAAANSUhEUgAAAYAAAAGACAYAAACkx7W/AAAACXBIWXMAAA7DAAAOwwHHb6hk
+      AAAOKElEQVR4nO3d71NU593H8c8usICAgpiKjnE0qcokI22Nqenkn8sf15mk1Snp1NaUqDUo
+      IigsqCCwsHs/6ITW+07vlgSizff1eqKzP865lgf73nOuvc42er1eLwCU03zTAwDgzRAAgKIE
+      AKAoAQAo6q0MQKfTyfLy8pseBsBP2lsZgG63m52dnTc9DICftLcyAAAcPQEAKEoAAIoSAICi
+      BACgKAEAKEoAAIoSAICiBAA4UltbW9nY2Ei32z2U7a2treVPf/pTdnZ28urVq+98zMbGRl68
+      ePHabe12+7UFpktLS4cynv9mAgAcqS+++CJzc3P57W9/mz/+8Y/5oT9BMjs7m/Pnz6evry8P
+      Hz7cv/2ft7u+vp6VlZXXnvf48ePXgnH//v3v3P6/G99P6SdU+t/0AICftsHBwVy9ejX9/f2Z
+      nZ3NyspKOp1OhoeH8/XXX2dmZiaLi4tZXFzM+Ph4pqens7S0lMXFxbx69SoXLlzImTNn0mg0
+      Mjc3l3a7nbm5uczMzKTVaqXX6+XJkyeZn5/P2NhYpqen9/fd6/UyPz+fJ0+eZGVlJefOndu/
+      r9PpZHZ2NhsbG7l69WrGxsZy586dvHz5MhcuXMjp06fz4MGDtFqtrK2t5dKlS7l9+3Z2dnYy
+      PT2dEydOvIk/56FyBAD8aM6ePZvV1dWsrq7m1q1buXLlSnZ2drK0tJRPPvkkSbKwsJDV1dWc
+      Pn06N27cyL1799LpdJIkly5dytTUVK5fv55Wq5XHjx9nb28vd+/ezccff5y+vr48efJkf3/t
+      djvLy8v5+OOP8+677742lm63mytXrmRmZib379/Pw4cPMzQ0lOvXr+fu3bvZ3d3NnTt3sry8
+      nEuXLuXOnTt59913c+3atdy+ffsncSTgCAD40bx69SqDg4PpdDr56KOPcvz48Tx69ChTU1Np
+      NBo5e/ZsHj58mL6+vhw7dix9fX0ZHR3N7u5uWq1WGo1Gkuz/myTb29tZX1/Pl19+mZ2dnbRa
+      rQwODiZJVldXc/78+TSbzTSbr3/eHRwczLFjx7K9vZ1ut5u1tbVsbGxkfX09e3t72d3dzdjY
+      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
+      wPdzKF8D3d7eztLSUpaXl9NqtV67b3d3N0NDQ4exGwAO0aF8C+jMmTPp9Xo5e/ZsBgcHX1vs
+      NTY2lrm5uTx69CgvXrw4jN0BcAgOvBJ4e3s73W43w8PD+5d7/vb8frvdzvj4eCYmJvL8+fOM
+      jo4mSRYWFtLr9TI2Npbx8fF/uxrYSmCAo3ckl4L4oQQA4OhZCAZQlAAAFCUAAEUdOADz8/PZ
+      3d09irEA8CM6cACWl5e/83o+/24u+S2cawYo7cALwb79kfdOp5NTp07lypUruXfvXp49e5Zm
+      s5lf/epXefDgQfr7+7O8vJxf/OIX+fOf/5xOp5OJiYlcvnz5P/pRGACO1oGPABqNRj788MN8
+      +umnWVlZyd7eXpaWlnLjxo1MTU1lYWEhKysrabfb+eijj/LkyZOcOnUqN27cSLvdTqfTOYrX
+      AcABHfgIoNFopNVqpdFopNlsptPpZHV1NbOzs+l2uzlz5kxarVY++OCD9Pf3Z3NzM6urq1lZ
+      WUniVBDA2+IHXwtocHAwIyMjuXDhQnZ2dvZ/B/jb0zzvvPNOXrx4kffff3//NBEAb96BA3Dx
+      4sX9N/mf//znaTQa+eSTTzI/P59Wq5Xz58+n0WjsP+bUqVPp9XpZWFjIyZMn928H4M1yKQiA
+      opyPAShKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACK
+      EgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgB
+      AChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCA
+      ogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChK
+      AACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQA
+      oCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACK
+      EgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgB
+      AChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCA
+      ogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChK
+      AACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQA
+      oCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACKEgCAogQAoCgBAChKAACK
+      EgCAogQAoKj/AYSSg+bACd8GAAAAAElFTkSuQmCC
     </thumbnail>
     <thumbnail height='384' name='Registered crimes by month' width='384'>
       iVBORw0KGgoAAAANSUhEUgAAAYAAAAGACAYAAACkx7W/AAAACXBIWXMAAA7DAAAOwwHHb6hk
