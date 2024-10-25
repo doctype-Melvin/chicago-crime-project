@@ -1,0 +1,2169 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20243.24.1010.1014                               -->
+<workbook original-version='18.1' source-build='2024.3.0 (20243.24.1010.1014)' source-platform='mac' version='18.1' xml:base='https://public.tableau.com' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AnimationOnByDefault />
+    <MapboxVectorStylesAndLayers />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelExtractV2 />
+    <ObjectModelTableType />
+    <RelationshipCalculations />
+    <SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <SortTagCleanup />
+    <SpatialFileLayer />
+    <_.fcp.VConnDownstreamExtractsWithWarnings.true...VConnDownstreamExtractsWithWarnings />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <repository-location id='ChicagoCrimeV2' path='/workbooks' revision='2.8' />
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource hasconnection='false' inline='true' name='Parameters' version='18.1'>
+      <aliases enabled='yes' />
+      <column caption='Select Year' datatype='string' datatype-customized='true' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;All&quot;'>
+        <calculation class='tableau' formula='&quot;All&quot;' />
+        <aliases>
+          <alias key='&quot;2014&quot;' value='2014 (Base Year)' />
+        </aliases>
+        <members>
+          <member value='&quot;All&quot;' />
+          <member alias='2014 (Base Year)' value='&quot;2014&quot;' />
+          <member value='&quot;2015&quot;' />
+          <member value='&quot;2016&quot;' />
+        </members>
+      </column>
+    </datasource>
+    <datasource caption='Crimes in Chicago Final Interview' inline='true' name='federated.1weigfr03157ul1eu0dyt1bny3v7' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='Crimes in Chicago Final Interview' name='textscan.1usg5ir1tr2dea14ofoyv0sh08ji'>
+            <connection class='textscan' directory='/Users/webdev/Documents/My Tableau Repository/Datasources/Chicago Crime Statistics' filename='Crimes in Chicago Final Interview.csv' password='' server='' workgroup-auth-mode='as-is' />
+          </named-connection>
+          <named-connection caption='geo_export_2f82ce33-d424-490f-803d-9cd92c64f040' name='ogrdirect.05yy6nl05tw3eb13ogizu1hhetw7'>
+            <connection class='ogrdirect' directory='/Users/webdev/Documents/My Tableau Repository/Datasources/Chicago Crime Statistics/Boundaries - Community Areas (current)' filename='geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp' password='' server='' tablename='' />
+          </named-connection>
+        </named-connections>
+        <relation type='collection'>
+          <relation connection='textscan.1usg5ir1tr2dea14ofoyv0sh08ji' name='Crimes in Chicago Final Interview.csv' table='[Crimes in Chicago Final Interview#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en' separator=','>
+              <column datatype='integer' name='ID' ordinal='0' />
+              <column datatype='string' name='Case Number' ordinal='1' />
+              <column datatype='datetime' name='Date' ordinal='2' />
+              <column datatype='string' name='Block' ordinal='3' />
+              <column datatype='string' name='IUCR' ordinal='4' />
+              <column datatype='string' name='Primary Type' ordinal='5' />
+              <column datatype='string' name='Description' ordinal='6' />
+              <column datatype='string' name='Location Description' ordinal='7' />
+              <column datatype='boolean' name='Arrest' ordinal='8' />
+              <column datatype='boolean' name='Domestic' ordinal='9' />
+              <column datatype='integer' name='Beat' ordinal='10' />
+              <column datatype='real' name='District' ordinal='11' />
+              <column datatype='real' name='Ward' ordinal='12' />
+              <column datatype='real' name='Community Area' ordinal='13' />
+              <column datatype='string' name='FBI Code' ordinal='14' />
+              <column datatype='real' name='X Coordinate' ordinal='15' />
+              <column datatype='real' name='Y Coordinate' ordinal='16' />
+              <column datatype='datetime' name='Updated On' ordinal='17' />
+              <column datatype='real' name='Latitude' ordinal='18' />
+              <column datatype='real' name='Longitude' ordinal='19' />
+              <column datatype='string' name='Location' ordinal='20' />
+            </columns>
+          </relation>
+          <relation connection='textscan.1usg5ir1tr2dea14ofoyv0sh08ji' name='Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv' table='[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en' separator=','>
+              <column datatype='integer' name='Community Area Number' ordinal='0' />
+              <column datatype='string' name='COMMUNITY AREA NAME' ordinal='1' />
+              <column datatype='real' name='PERCENT OF HOUSING CROWDED' ordinal='2' />
+              <column datatype='real' name='PERCENT HOUSEHOLDS BELOW POVERTY' ordinal='3' />
+              <column datatype='real' name='PERCENT AGED 16+ UNEMPLOYED' ordinal='4' />
+              <column datatype='real' name='PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA' ordinal='5' />
+              <column datatype='real' name='PERCENT AGED UNDER 18 OR OVER 64' ordinal='6' />
+              <column datatype='integer' name='PER CAPITA INCOME ' ordinal='7' />
+              <column datatype='integer' name='HARDSHIP INDEX' ordinal='8' />
+            </columns>
+          </relation>
+          <relation connection='ogrdirect.05yy6nl05tw3eb13ogizu1hhetw7' name='geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp' table='[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp]' type='table'>
+            <columns>
+              <column datatype='real' name='area' ordinal='0' />
+              <column datatype='string' name='area_num_1' ordinal='1' />
+              <column datatype='string' name='area_numbe' ordinal='2' />
+              <column datatype='real' name='comarea' ordinal='3' />
+              <column datatype='real' name='comarea_id' ordinal='4' />
+              <column datatype='string' name='community' ordinal='5' />
+              <column datatype='real' name='perimeter' ordinal='6' />
+              <column datatype='real' name='shape_area' ordinal='7' />
+              <column datatype='real' name='shape_len' ordinal='8' />
+              <column datatype='spatial' name='Geometry' ordinal='9' />
+            </columns>
+          </relation>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;¤&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_GB&quot;</attribute>
+              <attribute datatype='string' name='currency'>&quot;¤&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ID</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[ID]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>ID</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Case Number</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Case Number]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Case Number</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Date</remote-name>
+            <remote-type>135</remote-type>
+            <local-name>[Date]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Date</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Block</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Block]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Block</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>IUCR</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[IUCR]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>IUCR</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Primary Type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Primary Type]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Primary Type</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Description</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Description]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Description</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Location Description</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Location Description]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Location Description</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Arrest</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[Arrest]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Arrest</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Domestic</remote-name>
+            <remote-type>11</remote-type>
+            <local-name>[Domestic]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Domestic</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>boolean</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Beat</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Beat]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Beat</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>District</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[District]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>District</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Ward</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Ward]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Ward</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Community Area</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Community Area]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Community Area</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>FBI Code</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[FBI Code]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>FBI Code</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>X Coordinate</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[X Coordinate]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>X Coordinate</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Y Coordinate</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Y Coordinate]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Y Coordinate</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Updated On</remote-name>
+            <remote-type>135</remote-type>
+            <local-name>[Updated On]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Updated On</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>datetime</local-type>
+            <aggregation>Year</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Latitude</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Latitude]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Latitude</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Longitude</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Longitude]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Longitude</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Location</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Location]</local-name>
+            <parent-name>[Crimes in Chicago Final Interview.csv]</parent-name>
+            <remote-alias>Location</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Community Area Number</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Community Area Number]</local-name>
+            <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv]</parent-name>
+            <remote-alias>Community Area Number</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>COMMUNITY AREA NAME</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[COMMUNITY AREA NAME]</local-name>
+            <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv]</parent-name>
+            <remote-alias>COMMUNITY AREA NAME</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RGB' />
+            <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PERCENT OF HOUSING CROWDED</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[PERCENT OF HOUSING CROWDED]</local-name>
+            <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv]</parent-name>
+            <remote-alias>PERCENT OF HOUSING CROWDED</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PERCENT HOUSEHOLDS BELOW POVERTY</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[PERCENT HOUSEHOLDS BELOW POVERTY]</local-name>
+            <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv]</parent-name>
+            <remote-alias>PERCENT HOUSEHOLDS BELOW POVERTY</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PERCENT AGED 16+ UNEMPLOYED</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[PERCENT AGED 16+ UNEMPLOYED]</local-name>
+            <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv]</parent-name>
+            <remote-alias>PERCENT AGED 16+ UNEMPLOYED</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA]</local-name>
+            <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv]</parent-name>
+            <remote-alias>PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PERCENT AGED UNDER 18 OR OVER 64</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[PERCENT AGED UNDER 18 OR OVER 64]</local-name>
+            <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv]</parent-name>
+            <remote-alias>PERCENT AGED UNDER 18 OR OVER 64</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>PER CAPITA INCOME </remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[PER CAPITA INCOME ]</local-name>
+            <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv]</parent-name>
+            <remote-alias>PER CAPITA INCOME </remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>HARDSHIP INDEX</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[HARDSHIP INDEX]</local-name>
+            <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv]</parent-name>
+            <remote-alias>HARDSHIP INDEX</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>area</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[area]</local-name>
+            <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp]</parent-name>
+            <remote-alias>area</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>area_num_1</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[area_num_1]</local-name>
+            <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp]</parent-name>
+            <remote-alias>area_num_1</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>area_numbe</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[area_numbe]</local-name>
+            <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp]</parent-name>
+            <remote-alias>area_numbe</remote-alias>
+            <ordinal>32</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>comarea</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[comarea]</local-name>
+            <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp]</parent-name>
+            <remote-alias>comarea</remote-alias>
+            <ordinal>33</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>comarea_id</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[comarea_id]</local-name>
+            <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp]</parent-name>
+            <remote-alias>comarea_id</remote-alias>
+            <ordinal>34</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>community</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[community]</local-name>
+            <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp]</parent-name>
+            <remote-alias>community</remote-alias>
+            <ordinal>35</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='binary' />
+            <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>perimeter</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[perimeter]</local-name>
+            <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp]</parent-name>
+            <remote-alias>perimeter</remote-alias>
+            <ordinal>36</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>shape_area</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[shape_area]</local-name>
+            <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp]</parent-name>
+            <remote-alias>shape_area</remote-alias>
+            <ordinal>37</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>shape_len</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[shape_len]</local-name>
+            <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp]</parent-name>
+            <remote-alias>shape_len</remote-alias>
+            <ordinal>38</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Geometry</remote-name>
+            <remote-type>8</remote-type>
+            <local-name>[Geometry]</local-name>
+            <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp]</parent-name>
+            <remote-alias>Geometry</remote-alias>
+            <ordinal>39</ordinal>
+            <local-type>spatial</local-type>
+            <aggregation>Collect</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='# Cases Previous Year' datatype='integer' name='[# COM Cases x Previous Year (copy)_5312488348791508993]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM(&#10;    IF [Parameters].[Parameter 1] = &apos;All&apos; Then [Calculation_3620049681770532864] &#10;    ELSEIF YEAR([Date]) = INT([Parameters].[Parameter 1]) - 1 THEN [Calculation_3620049681770532864]&#10;    ELSE 0&#10;    END&#10;)' />
+      </column>
+      <column caption='# Cases Selected Year' datatype='integer' name='[# COM Cases x Selected Year (copy)_5312488348791246848]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM(&#10;IF YEAR([Date]) = INT([Parameters].[Parameter 1]) &#10;THEN [Calculation_3620049681770532864]&#10;ELSEIF [Parameters].[Parameter 1] = &apos;All&apos; &#10;then [Calculation_3620049681770532864] END)' />
+      </column>
+      <column caption='# Cases 2016' datatype='integer' name='[# Cases 2014 (copy)_5266044977633148935]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM(IF YEAR([Date])=INT(2016) THEN [Calculation_3620049681770532864] END)' />
+      </column>
+      <column caption='BOOL Increase' datatype='boolean' name='[# Increased Crime (copy)_5176465566256156675]' role='measure' type='nominal'>
+        <calculation class='tableau' formula='[% COM Y2Y Crime (copy)_5312488348791672834] &lt; 0' />
+      </column>
+      <column caption='% Y2Y Crime' datatype='real' name='[% COM Y2Y Crime (copy)_5312488348791672834]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [Parameters].[Parameter 1] = &apos;All&apos;&#10;then ([# Cases 2014 (copy)_5266044977633148935] - [Calculation_5266044977632870406]) / [Calculation_5266044977632870406]&#10;ELSEIF  [# COM Cases x Previous Year (copy)_5312488348791508993] != 0&#10;THEN ([# COM Cases x Selected Year (copy)_5312488348791246848] - [# COM Cases x Previous Year (copy)_5312488348791508993]) / [# COM Cases x Previous Year (copy)_5312488348791508993]&#10;ELSEIF [Parameters].[Parameter 1] = &apos;2014&apos;&#10;THEN 1&#10;END' />
+      </column>
+      <column datatype='boolean' name='[Arrest]' role='dimension' type='nominal' />
+      <column caption='Community Area Name' datatype='string' name='[COMMUNITY AREA NAME]' role='dimension' type='nominal' />
+      <column caption='# Cases by ID' datatype='integer' name='[Calculation_3620049681770532864]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='{ FIXED [ID] : COUNT([__tableau_internal_object_id__].[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]) }' />
+      </column>
+      <column caption='0 Empty String' datatype='string' name='[Calculation_3620049681770971137]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='&apos;&apos;' />
+      </column>
+      <column caption='3 Year Filter' datatype='boolean' name='[Calculation_3776760875100917760]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='If [Parameters].[Parameter 1] = &apos;All&apos; then TRUE&#10;Else&#10;YEAR([Date]) = INT([Parameters].[Parameter 1])&#10;END' />
+      </column>
+      <column caption='Year Tag' datatype='string' name='[Calculation_4103412585819250688]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='if [Parameters].[Parameter 1] = &apos;All&apos; then &apos;2014 - 2016&apos;&#10;else [Parameters].[Parameter 1]&#10;end' />
+      </column>
+      <column caption='Arrested Tags' datatype='string' name='[Calculation_4439845551870099456]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IF [Arrest] = TRUE THEN &apos;Yes&apos;&#10;Else &apos;No&apos;&#10;END' />
+      </column>
+      <column caption='Tag Previous Year' datatype='string' name='[Calculation_5220305293893894144]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='CASE [Parameters].[Parameter 1]&#10;When &apos;2014&apos; then &apos;Base Year 2014&apos;&#10;When &apos;2015&apos; then &apos;2015 compared to 2014&apos;&#10;when &apos;2016&apos; then &apos;2016 compared to 2015&apos;&#10;when &apos;All&apos; then &apos;Change from 2014 to 2016&apos;&#10;End' />
+      </column>
+      <column caption='# Cases 2014' datatype='integer' name='[Calculation_5266044977632870406]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM(IF YEAR([Date])=INT(2014) THEN [Calculation_3620049681770532864] END)' />
+      </column>
+      <column aggregation='Sum' datatype='real' name='[Community Area]' role='dimension' type='ordinal' />
+      <column caption='Hardship Index' datatype='integer' name='[HARDSHIP INDEX]' role='measure' type='quantitative' />
+      <column datatype='integer' name='[ID]' role='dimension' type='ordinal' />
+      <column caption='Iucr' datatype='string' name='[IUCR]' role='dimension' type='nominal' />
+      <column aggregation='Avg' datatype='real' name='[Latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
+      <column datatype='string' name='[Location Description]' role='dimension' type='nominal'>
+        <aliases>
+          <alias key='&quot;PARKING LOT/GARAGE(NON.RESID.)&quot;' value='PARKING LOT/GARAGE(Public)' />
+        </aliases>
+      </column>
+      <column aggregation='Avg' datatype='real' name='[Longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
+      <column caption='Per Capita Income' datatype='integer' name='[PER CAPITA INCOME ]' role='measure' type='quantitative' />
+      <column caption='Percent Aged 16+ Unemployed' datatype='real' name='[PERCENT AGED 16+ UNEMPLOYED]' role='measure' type='quantitative' />
+      <column caption='Percent Aged 25+ Without High School Diploma' datatype='real' name='[PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA]' role='measure' type='quantitative' />
+      <column caption='Percent Aged Under 18 Or Over 64' datatype='real' name='[PERCENT AGED UNDER 18 OR OVER 64]' role='measure' type='quantitative' />
+      <column caption='Percent Households Below Poverty' datatype='real' name='[PERCENT HOUSEHOLDS BELOW POVERTY]' role='measure' type='quantitative' />
+      <column caption='Percent Of Housing Crowded' datatype='real' name='[PERCENT OF HOUSING CROWDED]' role='measure' type='quantitative' />
+      <column datatype='string' name='[Primary Type]' role='dimension' type='nominal' />
+      <column caption='Socioeconomic' datatype='table' name='[__tableau_internal_object_id__].[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]' role='measure' type='quantitative' />
+      <column caption='Primary' datatype='table' name='[__tableau_internal_object_id__].[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]' role='measure' type='quantitative' />
+      <column caption='Geo' datatype='table' name='[__tableau_internal_object_id__].[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]' role='measure' type='quantitative' />
+      <column caption='Area' datatype='real' name='[area]' role='measure' type='quantitative' />
+      <column caption='Area Num 1' datatype='string' name='[area_num_1]' role='dimension' type='nominal' />
+      <column caption='Area Numbe' datatype='string' name='[area_numbe]' role='dimension' type='nominal' />
+      <column caption='Comarea' datatype='real' name='[comarea]' role='measure' type='quantitative' />
+      <column caption='Comarea Id' datatype='real' name='[comarea_id]' role='dimension' type='ordinal' />
+      <column caption='Community' datatype='string' name='[community]' role='dimension' type='nominal' />
+      <column caption='Perimeter' datatype='real' name='[perimeter]' role='measure' type='quantitative' />
+      <column caption='Shape Area' datatype='real' name='[shape_area]' role='measure' type='quantitative' />
+      <column caption='Shape Len' datatype='real' name='[shape_len]' role='measure' type='quantitative' />
+      <column-instance column='[Arrest]' derivation='None' name='[none:Arrest:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Calculation_4439845551870099456]' derivation='None' name='[none:Calculation_4439845551870099456:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Forecast Indicator]' derivation='None' forecast-column-base='[Forecast Indicator]' forecast-column-type='forecast-indicator' name='[none:Forecast Indicator:nk]' pivot='key' type='nominal' />
+      <column-instance column='[Primary Type]' derivation='None' name='[none:Primary Type:nk]' pivot='key' type='nominal' />
+      <group caption='Tooltip (Community Area)' hidden='true' name='[Tooltip (Community Area)]' name-style='unqualified' user:auto-column='sheet_link' user:ui-vit-column='true'>
+        <groupfilter function='crossjoin'>
+          <groupfilter function='level-members' level='[Community Area]' />
+        </groupfilter>
+      </group>
+      <group caption='Tooltip (Community Area,Primary Type)' hidden='true' name='[Tooltip (Community Area,Primary Type)]' name-style='unqualified' user:auto-column='sheet_link' user:ui-vit-column='true'>
+        <groupfilter function='crossjoin'>
+          <groupfilter function='level-members' level='[Community Area]' />
+          <groupfilter function='level-members' level='[Primary Type]' />
+        </groupfilter>
+      </group>
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='/var/folders/yj/kd9f72xj5j7fszfylzh69_n00000gn/T/tableau-temp/#TableauTemp_1olmssw1iqtymi11w3u441o437mc.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='10/25/2024 04:33:32 AM' username='tableau_internal_user'>
+          <relation type='collection'>
+            <relation name='Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2' table='[Extract].[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]' type='table' />
+            <relation name='Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594' table='[Extract].[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]' type='table' />
+            <relation name='geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C' table='[Extract].[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]' type='table' />
+          </relation>
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>ID</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[ID]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>ID</remote-alias>
+              <ordinal>0</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>780563</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Case Number</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Case Number]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Case Number</remote-alias>
+              <ordinal>1</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>780563</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Date</remote-name>
+              <remote-type>135</remote-type>
+              <local-name>[Date]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Date</remote-alias>
+              <ordinal>2</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>datetime</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>326776</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Block</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Block]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Block</remote-alias>
+              <ordinal>3</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>72173</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>IUCR</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[IUCR]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>IUCR</remote-alias>
+              <ordinal>4</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>615</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Primary Type</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Primary Type]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Primary Type</remote-alias>
+              <ordinal>5</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>52</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Description</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Description]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Description</remote-alias>
+              <ordinal>6</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>570</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Location Description</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Location Description]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Location Description</remote-alias>
+              <ordinal>7</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>234</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Arrest</remote-name>
+              <remote-type>11</remote-type>
+              <local-name>[Arrest]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Arrest</remote-alias>
+              <ordinal>8</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>boolean</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Domestic</remote-name>
+              <remote-type>11</remote-type>
+              <local-name>[Domestic]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Domestic</remote-alias>
+              <ordinal>9</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>boolean</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>2</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Beat</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Beat]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Beat</remote-alias>
+              <ordinal>10</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>298</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>District</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[District]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>District</remote-alias>
+              <ordinal>11</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>22</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Ward</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Ward]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Ward</remote-alias>
+              <ordinal>12</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>50</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Community Area</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Community Area]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Community Area</remote-alias>
+              <ordinal>13</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>77</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>FBI Code</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[FBI Code]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>FBI Code</remote-alias>
+              <ordinal>14</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>23</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>X Coordinate</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[X Coordinate]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>X Coordinate</remote-alias>
+              <ordinal>15</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>122075</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Y Coordinate</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Y Coordinate]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Y Coordinate</remote-alias>
+              <ordinal>16</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>137258</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Updated On</remote-name>
+              <remote-type>135</remote-type>
+              <local-name>[Updated On]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Updated On</remote-alias>
+              <ordinal>17</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>datetime</local-type>
+              <aggregation>Year</aggregation>
+              <approx-count>2293</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Latitude</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Latitude]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Latitude</remote-alias>
+              <ordinal>18</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>177975</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Longitude</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Longitude]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Longitude</remote-alias>
+              <ordinal>19</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>177975</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Location</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Location]</local-name>
+              <parent-name>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</parent-name>
+              <remote-alias>Location</remote-alias>
+              <ordinal>20</ordinal>
+              <family>Crimes in Chicago Final Interview.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>177975</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <object-id>[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Community Area Number</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Community Area Number]</local-name>
+              <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</parent-name>
+              <remote-alias>Community Area Number</remote-alias>
+              <ordinal>21</ordinal>
+              <family>Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>78</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>COMMUNITY AREA NAME</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[COMMUNITY AREA NAME]</local-name>
+              <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</parent-name>
+              <remote-alias>COMMUNITY AREA NAME</remote-alias>
+              <ordinal>22</ordinal>
+              <family>Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>78</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RGB' />
+              <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>PERCENT OF HOUSING CROWDED</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[PERCENT OF HOUSING CROWDED]</local-name>
+              <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</parent-name>
+              <remote-alias>PERCENT OF HOUSING CROWDED</remote-alias>
+              <ordinal>23</ordinal>
+              <family>Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>56</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>PERCENT HOUSEHOLDS BELOW POVERTY</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[PERCENT HOUSEHOLDS BELOW POVERTY]</local-name>
+              <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</parent-name>
+              <remote-alias>PERCENT HOUSEHOLDS BELOW POVERTY</remote-alias>
+              <ordinal>24</ordinal>
+              <family>Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>68</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>PERCENT AGED 16+ UNEMPLOYED</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[PERCENT AGED 16+ UNEMPLOYED]</local-name>
+              <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</parent-name>
+              <remote-alias>PERCENT AGED 16+ UNEMPLOYED</remote-alias>
+              <ordinal>25</ordinal>
+              <family>Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>67</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA]</local-name>
+              <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</parent-name>
+              <remote-alias>PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA</remote-alias>
+              <ordinal>26</ordinal>
+              <family>Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>70</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>PERCENT AGED UNDER 18 OR OVER 64</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[PERCENT AGED UNDER 18 OR OVER 64]</local-name>
+              <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</parent-name>
+              <remote-alias>PERCENT AGED UNDER 18 OR OVER 64</remote-alias>
+              <ordinal>27</ordinal>
+              <family>Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>67</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>PER CAPITA INCOME </remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[PER CAPITA INCOME ]</local-name>
+              <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</parent-name>
+              <remote-alias>PER CAPITA INCOME </remote-alias>
+              <ordinal>28</ordinal>
+              <family>Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>78</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>HARDSHIP INDEX</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[HARDSHIP INDEX]</local-name>
+              <parent-name>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</parent-name>
+              <remote-alias>HARDSHIP INDEX</remote-alias>
+              <ordinal>29</ordinal>
+              <family>Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>78</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>area</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[area]</local-name>
+              <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</parent-name>
+              <remote-alias>area</remote-alias>
+              <ordinal>30</ordinal>
+              <family>geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>area_num_1</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[area_num_1]</local-name>
+              <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</parent-name>
+              <remote-alias>area_num_1</remote-alias>
+              <ordinal>31</ordinal>
+              <family>geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>77</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='binary' />
+              <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>area_numbe</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[area_numbe]</local-name>
+              <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</parent-name>
+              <remote-alias>area_numbe</remote-alias>
+              <ordinal>32</ordinal>
+              <family>geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>77</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='binary' />
+              <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>comarea</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[comarea]</local-name>
+              <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</parent-name>
+              <remote-alias>comarea</remote-alias>
+              <ordinal>33</ordinal>
+              <family>geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>comarea_id</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[comarea_id]</local-name>
+              <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</parent-name>
+              <remote-alias>comarea_id</remote-alias>
+              <ordinal>34</ordinal>
+              <family>geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>community</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[community]</local-name>
+              <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</parent-name>
+              <remote-alias>community</remote-alias>
+              <ordinal>35</ordinal>
+              <family>geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>77</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='binary' />
+              <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>perimeter</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[perimeter]</local-name>
+              <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</parent-name>
+              <remote-alias>perimeter</remote-alias>
+              <ordinal>36</ordinal>
+              <family>geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>shape_area</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[shape_area]</local-name>
+              <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</parent-name>
+              <remote-alias>shape_area</remote-alias>
+              <ordinal>37</ordinal>
+              <family>geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>77</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>shape_len</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[shape_len]</local-name>
+              <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</parent-name>
+              <remote-alias>shape_len</remote-alias>
+              <ordinal>38</ordinal>
+              <family>geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>77</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Geometry</remote-name>
+              <remote-type>128</remote-type>
+              <local-name>[Geometry]</local-name>
+              <parent-name>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</parent-name>
+              <remote-alias>Geometry</remote-alias>
+              <ordinal>39</ordinal>
+              <family>geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp</family>
+              <local-type>spatial</local-type>
+              <aggregation>Collect</aggregation>
+              <approx-count>77</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]</object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:Arrest:nk]' type='palette'>
+            <map to='#bab0ac'>
+              <bucket>true</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>false</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:Calculation_4439845551870099456:nk]' type='palette'>
+            <map to='#4e79a7'>
+              <bucket>&quot;NO&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;Yes&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;No&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:Primary Type:nk]' type='palette'>
+            <map to='#499894'>
+              <bucket>&quot;DECEPTIVE PRACTICE&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;ROBBERY&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;ARSON&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;NON-CRIMINAL (SUBJECT SPECIFIED)&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;CONCEALED CARRY LICENSE VIOLATION&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;OTHER OFFENSE&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;INTERFERENCE WITH PUBLIC OFFICER&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;WEAPONS VIOLATION&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;GAMBLING&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;SEX OFFENSE&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;CRIM SEXUAL ASSAULT&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;PROSTITUTION&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;NON - CRIMINAL&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;ASSAULT&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;OBSCENITY&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;MOTOR VEHICLE THEFT&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;CRIMINAL DAMAGE&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;PUBLIC INDECENCY&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;INTIMIDATION&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;KIDNAPPING&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;NARCOTICS&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;NON-CRIMINAL&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;HOMICIDE&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;STALKING&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;CRIMINAL TRESPASS&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;PUBLIC PEACE VIOLATION&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;BATTERY&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;OFFENSE INVOLVING CHILDREN&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;LIQUOR LAW VIOLATION&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;HUMAN TRAFFICKING&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;THEFT&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;BURGLARY&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;OTHER NARCOTIC VIOLATION&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <date-options start-of-week='monday' />
+      <default-sorts>
+        <manual-sort column='[none:Forecast Indicator:nk]' direction='ASC'>
+          <dictionary>
+            <bucket>&quot;Actual&quot;</bucket>
+            <bucket>&quot;Estimate&quot;</bucket>
+          </dictionary>
+        </manual-sort>
+      </default-sorts>
+      <datasource-dependencies datasource='Parameters'>
+        <column caption='Select Year' datatype='string' datatype-customized='true' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;All&quot;'>
+          <calculation class='tableau' formula='&quot;All&quot;' />
+          <aliases>
+            <alias key='&quot;2014&quot;' value='2014 (Base Year)' />
+          </aliases>
+        </column>
+      </datasource-dependencies>
+      <object-graph>
+        <objects>
+          <object caption='Socioeconomic' id='Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594'>
+            <properties context=''>
+              <relation connection='textscan.1usg5ir1tr2dea14ofoyv0sh08ji' name='Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv' table='[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en' separator=','>
+                  <column datatype='integer' name='Community Area Number' ordinal='0' />
+                  <column datatype='string' name='COMMUNITY AREA NAME' ordinal='1' />
+                  <column datatype='real' name='PERCENT OF HOUSING CROWDED' ordinal='2' />
+                  <column datatype='real' name='PERCENT HOUSEHOLDS BELOW POVERTY' ordinal='3' />
+                  <column datatype='real' name='PERCENT AGED 16+ UNEMPLOYED' ordinal='4' />
+                  <column datatype='real' name='PERCENT AGED 25+ WITHOUT HIGH SCHOOL DIPLOMA' ordinal='5' />
+                  <column datatype='real' name='PERCENT AGED UNDER 18 OR OVER 64' ordinal='6' />
+                  <column datatype='integer' name='PER CAPITA INCOME ' ordinal='7' />
+                  <column datatype='integer' name='HARDSHIP INDEX' ordinal='8' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594' table='[Extract].[Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594]' type='table' />
+            </properties>
+          </object>
+          <object caption='Primary' id='Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2'>
+            <properties context=''>
+              <relation connection='textscan.1usg5ir1tr2dea14ofoyv0sh08ji' name='Crimes in Chicago Final Interview.csv' table='[Crimes in Chicago Final Interview#csv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en' separator=','>
+                  <column datatype='integer' name='ID' ordinal='0' />
+                  <column datatype='string' name='Case Number' ordinal='1' />
+                  <column datatype='datetime' name='Date' ordinal='2' />
+                  <column datatype='string' name='Block' ordinal='3' />
+                  <column datatype='string' name='IUCR' ordinal='4' />
+                  <column datatype='string' name='Primary Type' ordinal='5' />
+                  <column datatype='string' name='Description' ordinal='6' />
+                  <column datatype='string' name='Location Description' ordinal='7' />
+                  <column datatype='boolean' name='Arrest' ordinal='8' />
+                  <column datatype='boolean' name='Domestic' ordinal='9' />
+                  <column datatype='integer' name='Beat' ordinal='10' />
+                  <column datatype='real' name='District' ordinal='11' />
+                  <column datatype='real' name='Ward' ordinal='12' />
+                  <column datatype='real' name='Community Area' ordinal='13' />
+                  <column datatype='string' name='FBI Code' ordinal='14' />
+                  <column datatype='real' name='X Coordinate' ordinal='15' />
+                  <column datatype='real' name='Y Coordinate' ordinal='16' />
+                  <column datatype='datetime' name='Updated On' ordinal='17' />
+                  <column datatype='real' name='Latitude' ordinal='18' />
+                  <column datatype='real' name='Longitude' ordinal='19' />
+                  <column datatype='string' name='Location' ordinal='20' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2' table='[Extract].[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]' type='table' />
+            </properties>
+          </object>
+          <object caption='Geo' id='geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C'>
+            <properties context=''>
+              <relation connection='ogrdirect.05yy6nl05tw3eb13ogizu1hhetw7' name='geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp' table='[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp]' type='table'>
+                <columns>
+                  <column datatype='real' name='area' ordinal='0' />
+                  <column datatype='string' name='area_num_1' ordinal='1' />
+                  <column datatype='string' name='area_numbe' ordinal='2' />
+                  <column datatype='real' name='comarea' ordinal='3' />
+                  <column datatype='real' name='comarea_id' ordinal='4' />
+                  <column datatype='string' name='community' ordinal='5' />
+                  <column datatype='real' name='perimeter' ordinal='6' />
+                  <column datatype='real' name='shape_area' ordinal='7' />
+                  <column datatype='real' name='shape_len' ordinal='8' />
+                  <column datatype='spatial' name='Geometry' ordinal='9' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C' table='[Extract].[geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C]' type='table' />
+            </properties>
+          </object>
+        </objects>
+        <relationships>
+          <relationship>
+            <expression op='='>
+              <expression op='[Community Area]' />
+              <expression op='FLOAT([Community Area Number])' />
+            </expression>
+            <first-end-point object-id='Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2' />
+            <second-end-point object-id='Census_Data_-_Selected_socioeconomic_indicators_in_Chicago__2008___2012_20241024.csv_60C9AD4800B74F0B9206BF9C76006594' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[Community Area]' />
+              <expression op='FLOAT([area_num_1])' />
+            </expression>
+            <first-end-point object-id='Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2' />
+            <second-end-point object-id='geo_export_2f82ce33-d424-490f-803d-9cd92c64f040.shp_0F44766D6214482F91704897DB957A7C' />
+          </relationship>
+        </relationships>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <mapsources>
+    <mapsource name='Tableau' />
+  </mapsources>
+  <worksheets>
+    <worksheet name='Chicago Map'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Crimes in Chicago Final Interview' name='federated.1weigfr03157ul1eu0dyt1bny3v7' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.1weigfr03157ul1eu0dyt1bny3v7'>
+            <column caption='Community Area Name' datatype='string' name='[COMMUNITY AREA NAME]' role='dimension' type='nominal' />
+            <column caption='0 Empty String' datatype='string' name='[Calculation_3620049681770971137]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='&apos;&apos;' />
+            </column>
+            <column datatype='spatial' name='[Geometry]' role='measure' type='nominal' />
+            <column-instance column='[Geometry]' derivation='Collect' name='[clct:Geometry:nk]' pivot='key' type='nominal' />
+            <column-instance column='[COMMUNITY AREA NAME]' derivation='None' name='[none:COMMUNITY AREA NAME:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_3620049681770971137]' derivation='None' name='[none:Calculation_3620049681770971137:nk]' pivot='key' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='map'>
+            <format attr='washout' value='0.0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <lod column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[clct:Geometry:nk]' />
+              <lod column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:Calculation_3620049681770971137:nk]' />
+              <lod column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:COMMUNITY AREA NAME:nk]' />
+              <geometry column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[clct:Geometry:nk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1weigfr03157ul1eu0dyt1bny3v7].[Latitude (generated)]</rows>
+        <cols>[federated.1weigfr03157ul1eu0dyt1bny3v7].[Longitude (generated)]</cols>
+      </table>
+      <simple-id uuid='{0E5AB977-A957-4D34-9727-BFECBC5E4BFD}' />
+    </worksheet>
+    <worksheet name='Crime development by month'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Crimes in Chicago Final Interview' name='federated.1weigfr03157ul1eu0dyt1bny3v7' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1weigfr03157ul1eu0dyt1bny3v7'>
+            <column caption='# Cases by ID' datatype='integer' name='[Calculation_3620049681770532864]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='{ FIXED [ID] : COUNT([__tableau_internal_object_id__].[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]) }' />
+            </column>
+            <column caption='0 Empty String' datatype='string' name='[Calculation_3620049681770971137]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='&apos;&apos;' />
+            </column>
+            <column datatype='datetime' name='[Date]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[ID]' role='dimension' type='ordinal' />
+            <column caption='Primary' datatype='table' name='[__tableau_internal_object_id__].[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_3620049681770971137]' derivation='None' name='[none:Calculation_3620049681770971137:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_3620049681770532864]' derivation='Sum' name='[sum:Calculation_3620049681770532864:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Date]' derivation='Month-Trunc' name='[tmn:Date:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Date]' derivation='Year' name='[yr:Date:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[yr:Date:ok]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[yr:Date:ok]' member='2014' />
+              <groupfilter function='member' level='[yr:Date:ok]' member='2015' />
+              <groupfilter function='member' level='[yr:Date:ok]' member='2016' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.1weigfr03157ul1eu0dyt1bny3v7].[yr:Date:ok]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <lod column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:Calculation_3620049681770971137:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.1weigfr03157ul1eu0dyt1bny3v7].[sum:Calculation_3620049681770532864:qk]</rows>
+        <cols>[federated.1weigfr03157ul1eu0dyt1bny3v7].[tmn:Date:qk]</cols>
+      </table>
+      <simple-id uuid='{06F6EDE5-8017-458B-8D15-A55E66DBFC17}' />
+    </worksheet>
+    <worksheet name='What types of crime decreased?'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Crimes in Chicago Final Interview' name='federated.1weigfr03157ul1eu0dyt1bny3v7' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='Select Year' datatype='string' datatype-customized='true' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;All&quot;'>
+              <calculation class='tableau' formula='&quot;All&quot;' />
+              <aliases>
+                <alias key='&quot;2014&quot;' value='2014 (Base Year)' />
+              </aliases>
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.1weigfr03157ul1eu0dyt1bny3v7'>
+            <column caption='# Cases Previous Year' datatype='integer' name='[# COM Cases x Previous Year (copy)_5312488348791508993]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM(&#10;    IF [Parameters].[Parameter 1] = &apos;All&apos; Then [Calculation_3620049681770532864] &#10;    ELSEIF YEAR([Date]) = INT([Parameters].[Parameter 1]) - 1 THEN [Calculation_3620049681770532864]&#10;    ELSE 0&#10;    END&#10;)' />
+            </column>
+            <column caption='# Cases Selected Year' datatype='integer' name='[# COM Cases x Selected Year (copy)_5312488348791246848]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM(&#10;IF YEAR([Date]) = INT([Parameters].[Parameter 1]) &#10;THEN [Calculation_3620049681770532864]&#10;ELSEIF [Parameters].[Parameter 1] = &apos;All&apos; &#10;then [Calculation_3620049681770532864] END)' />
+            </column>
+            <column caption='# Cases 2016' datatype='integer' name='[# Cases 2014 (copy)_5266044977633148935]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM(IF YEAR([Date])=INT(2016) THEN [Calculation_3620049681770532864] END)' />
+            </column>
+            <column caption='BOOL Increase' datatype='boolean' name='[# Increased Crime (copy)_5176465566256156675]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='[% COM Y2Y Crime (copy)_5312488348791672834] &lt; 0' />
+            </column>
+            <column caption='% Y2Y Crime' datatype='real' name='[% COM Y2Y Crime (copy)_5312488348791672834]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [Parameters].[Parameter 1] = &apos;All&apos;&#10;then ([# Cases 2014 (copy)_5266044977633148935] - [Calculation_5266044977632870406]) / [Calculation_5266044977632870406]&#10;ELSEIF  [# COM Cases x Previous Year (copy)_5312488348791508993] != 0&#10;THEN ([# COM Cases x Selected Year (copy)_5312488348791246848] - [# COM Cases x Previous Year (copy)_5312488348791508993]) / [# COM Cases x Previous Year (copy)_5312488348791508993]&#10;ELSEIF [Parameters].[Parameter 1] = &apos;2014&apos;&#10;THEN 1&#10;END' />
+            </column>
+            <column caption='# Cases by ID' datatype='integer' name='[Calculation_3620049681770532864]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='{ FIXED [ID] : COUNT([__tableau_internal_object_id__].[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]) }' />
+            </column>
+            <column caption='# Cases 2014' datatype='integer' name='[Calculation_5266044977632870406]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM(IF YEAR([Date])=INT(2014) THEN [Calculation_3620049681770532864] END)' />
+            </column>
+            <column datatype='datetime' name='[Date]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[ID]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Primary Type]' role='dimension' type='nominal' />
+            <column caption='Primary' datatype='table' name='[__tableau_internal_object_id__].[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]' role='measure' type='quantitative' />
+            <column-instance column='[Primary Type]' derivation='None' name='[none:Primary Type:nk]' pivot='key' type='nominal' />
+            <column-instance column='[# Increased Crime (copy)_5176465566256156675]' derivation='User' name='[usr:# Increased Crime (copy)_5176465566256156675:nk]' pivot='key' type='nominal' />
+            <column-instance column='[% COM Y2Y Crime (copy)_5312488348791672834]' derivation='User' name='[usr:% COM Y2Y Crime (copy)_5312488348791672834:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:Primary Type:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;ARSON&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;ASSAULT&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;BATTERY&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;BURGLARY&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;CONCEALED CARRY LICENSE VIOLATION&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;CRIM SEXUAL ASSAULT&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;CRIMINAL DAMAGE&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;CRIMINAL TRESPASS&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;DECEPTIVE PRACTICE&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;GAMBLING&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;HOMICIDE&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;HUMAN TRAFFICKING&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;INTERFERENCE WITH PUBLIC OFFICER&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;INTIMIDATION&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;KIDNAPPING&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;LIQUOR LAW VIOLATION&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;MOTOR VEHICLE THEFT&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;NARCOTICS&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;NON - CRIMINAL&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;NON-CRIMINAL&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;NON-CRIMINAL (SUBJECT SPECIFIED)&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;OBSCENITY&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;OFFENSE INVOLVING CHILDREN&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;OTHER NARCOTIC VIOLATION&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;OTHER OFFENSE&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;PROSTITUTION&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;PUBLIC INDECENCY&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;PUBLIC PEACE VIOLATION&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;ROBBERY&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;SEX OFFENSE&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;STALKING&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;THEFT&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;WEAPONS VIOLATION&quot;' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[usr:# Increased Crime (copy)_5176465566256156675:nk]'>
+            <groupfilter function='member' level='[usr:# Increased Crime (copy)_5176465566256156675:nk]' member='true' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='quantitative' column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[usr:% COM Y2Y Crime (copy)_5312488348791672834:qk]' included-values='in-range'>
+            <max>-0.001</max>
+          </filter>
+          <slices>
+            <column>[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:Primary Type:nk]</column>
+            <column>[federated.1weigfr03157ul1eu0dyt1bny3v7].[usr:# Increased Crime (copy)_5176465566256156675:nk]</column>
+            <column>[federated.1weigfr03157ul1eu0dyt1bny3v7].[usr:% COM Y2Y Crime (copy)_5312488348791672834:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.1weigfr03157ul1eu0dyt1bny3v7].[usr:% COM Y2Y Crime (copy)_5312488348791672834:qk]' value='p0.0%' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='size-bar' field='[federated.1weigfr03157ul1eu0dyt1bny3v7].[usr:% COM Y2Y Crime (copy)_5312488348791672834:qk]' field-type='quantitative' max-size='1' min-size='0.005' type='centersize' />
+            <encoding attr='color' field='[federated.1weigfr03157ul1eu0dyt1bny3v7].[usr:% COM Y2Y Crime (copy)_5312488348791672834:qk]' reverse='true' type='custom-interpolated'>
+              <color-palette custom='true' name='' type='ordered-diverging'>
+                <color>#9e3d22</color>
+                <color>#a3482e</color>
+                <color>#a8533c</color>
+                <color>#ae604a</color>
+                <color>#b36d59</color>
+                <color>#b87a69</color>
+                <color>#be897a</color>
+                <color>#c3978b</color>
+                <color>#c8a79d</color>
+                <color>#ceb7b0</color>
+                <color>#d3c7c4</color>
+                <color>#d9d9d9</color>
+                <color>#9dcbe4</color>
+                <color>#8ec2df</color>
+                <color>#80b6d9</color>
+                <color>#73a8d0</color>
+                <color>#669bc7</color>
+                <color>#5c91bf</color>
+                <color>#5385b2</color>
+                <color>#487aa9</color>
+                <color>#3b6ea0</color>
+                <color>#306495</color>
+                <color>#2b5c8a</color>
+              </color-palette>
+            </encoding>
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[usr:% COM Y2Y Crime (copy)_5312488348791672834:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='has-stroke' value='false' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-line-first' value='true' />
+                <format attr='mark-labels-line-last' value='true' />
+                <format attr='mark-labels-range-min' value='true' />
+                <format attr='mark-labels-range-max' value='true' />
+                <format attr='mark-labels-mode' value='all' />
+                <format attr='mark-labels-range-scope' value='pane' />
+                <format attr='mark-labels-range-field' value='' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:Primary Type:nk]</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{4F94A363-6481-45D4-8B7B-45F8739D647C}' />
+    </worksheet>
+    <worksheet name='What types of crime increased?'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Crimes in Chicago Final Interview' name='federated.1weigfr03157ul1eu0dyt1bny3v7' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='Select Year' datatype='string' datatype-customized='true' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;All&quot;'>
+              <calculation class='tableau' formula='&quot;All&quot;' />
+              <aliases>
+                <alias key='&quot;2014&quot;' value='2014 (Base Year)' />
+              </aliases>
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.1weigfr03157ul1eu0dyt1bny3v7'>
+            <column caption='# Cases Previous Year' datatype='integer' name='[# COM Cases x Previous Year (copy)_5312488348791508993]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM(&#10;    IF [Parameters].[Parameter 1] = &apos;All&apos; Then [Calculation_3620049681770532864] &#10;    ELSEIF YEAR([Date]) = INT([Parameters].[Parameter 1]) - 1 THEN [Calculation_3620049681770532864]&#10;    ELSE 0&#10;    END&#10;)' />
+            </column>
+            <column caption='# Cases Selected Year' datatype='integer' name='[# COM Cases x Selected Year (copy)_5312488348791246848]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM(&#10;IF YEAR([Date]) = INT([Parameters].[Parameter 1]) &#10;THEN [Calculation_3620049681770532864]&#10;ELSEIF [Parameters].[Parameter 1] = &apos;All&apos; &#10;then [Calculation_3620049681770532864] END)' />
+            </column>
+            <column caption='# Cases 2016' datatype='integer' name='[# Cases 2014 (copy)_5266044977633148935]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM(IF YEAR([Date])=INT(2016) THEN [Calculation_3620049681770532864] END)' />
+            </column>
+            <column caption='BOOL Increase' datatype='boolean' name='[# Increased Crime (copy)_5176465566256156675]' role='measure' type='nominal'>
+              <calculation class='tableau' formula='[% COM Y2Y Crime (copy)_5312488348791672834] &lt; 0' />
+            </column>
+            <column caption='% Y2Y Crime' datatype='real' name='[% COM Y2Y Crime (copy)_5312488348791672834]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='IF [Parameters].[Parameter 1] = &apos;All&apos;&#10;then ([# Cases 2014 (copy)_5266044977633148935] - [Calculation_5266044977632870406]) / [Calculation_5266044977632870406]&#10;ELSEIF  [# COM Cases x Previous Year (copy)_5312488348791508993] != 0&#10;THEN ([# COM Cases x Selected Year (copy)_5312488348791246848] - [# COM Cases x Previous Year (copy)_5312488348791508993]) / [# COM Cases x Previous Year (copy)_5312488348791508993]&#10;ELSEIF [Parameters].[Parameter 1] = &apos;2014&apos;&#10;THEN 1&#10;END' />
+            </column>
+            <column caption='# Cases by ID' datatype='integer' name='[Calculation_3620049681770532864]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='{ FIXED [ID] : COUNT([__tableau_internal_object_id__].[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]) }' />
+            </column>
+            <column caption='# Cases 2014' datatype='integer' name='[Calculation_5266044977632870406]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='SUM(IF YEAR([Date])=INT(2014) THEN [Calculation_3620049681770532864] END)' />
+            </column>
+            <column datatype='datetime' name='[Date]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[ID]' role='dimension' type='ordinal' />
+            <column datatype='string' name='[Primary Type]' role='dimension' type='nominal' />
+            <column caption='Primary' datatype='table' name='[__tableau_internal_object_id__].[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]' role='measure' type='quantitative' />
+            <column-instance column='[Primary Type]' derivation='None' name='[none:Primary Type:nk]' pivot='key' type='nominal' />
+            <column-instance column='[# Increased Crime (copy)_5176465566256156675]' derivation='User' name='[usr:# Increased Crime (copy)_5176465566256156675:nk]' pivot='key' type='nominal' />
+            <column-instance column='[% COM Y2Y Crime (copy)_5312488348791672834]' derivation='User' name='[usr:% COM Y2Y Crime (copy)_5312488348791672834:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:Primary Type:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;ARSON&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;ASSAULT&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;BATTERY&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;BURGLARY&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;CONCEALED CARRY LICENSE VIOLATION&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;CRIM SEXUAL ASSAULT&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;CRIMINAL DAMAGE&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;CRIMINAL TRESPASS&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;DECEPTIVE PRACTICE&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;GAMBLING&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;HOMICIDE&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;HUMAN TRAFFICKING&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;INTERFERENCE WITH PUBLIC OFFICER&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;INTIMIDATION&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;KIDNAPPING&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;LIQUOR LAW VIOLATION&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;MOTOR VEHICLE THEFT&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;NARCOTICS&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;NON - CRIMINAL&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;NON-CRIMINAL&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;NON-CRIMINAL (SUBJECT SPECIFIED)&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;OBSCENITY&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;OFFENSE INVOLVING CHILDREN&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;OTHER NARCOTIC VIOLATION&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;OTHER OFFENSE&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;PROSTITUTION&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;PUBLIC INDECENCY&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;PUBLIC PEACE VIOLATION&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;ROBBERY&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;SEX OFFENSE&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;STALKING&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;THEFT&quot;' />
+              <groupfilter function='member' level='[none:Primary Type:nk]' member='&quot;WEAPONS VIOLATION&quot;' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[usr:# Increased Crime (copy)_5176465566256156675:nk]'>
+            <groupfilter function='member' level='[usr:# Increased Crime (copy)_5176465566256156675:nk]' member='false' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:Primary Type:nk]</column>
+            <column>[federated.1weigfr03157ul1eu0dyt1bny3v7].[usr:# Increased Crime (copy)_5176465566256156675:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='cell'>
+            <format attr='text-format' field='[federated.1weigfr03157ul1eu0dyt1bny3v7].[usr:% COM Y2Y Crime (copy)_5312488348791672834:qk]' value='p0.0%' />
+          </style-rule>
+          <style-rule element='mark'>
+            <encoding attr='size-bar' field='[federated.1weigfr03157ul1eu0dyt1bny3v7].[usr:% COM Y2Y Crime (copy)_5312488348791672834:qk]' field-type='quantitative' max-size='1' min-size='0.005' type='centersize' />
+            <encoding attr='color' field='[federated.1weigfr03157ul1eu0dyt1bny3v7].[usr:% COM Y2Y Crime (copy)_5312488348791672834:qk]' reverse='true' type='custom-interpolated'>
+              <color-palette custom='true' name='' type='ordered-diverging'>
+                <color>#9e3d22</color>
+                <color>#a3482e</color>
+                <color>#a8533c</color>
+                <color>#ae604a</color>
+                <color>#b36d59</color>
+                <color>#b87a69</color>
+                <color>#be897a</color>
+                <color>#c3978b</color>
+                <color>#c8a79d</color>
+                <color>#ceb7b0</color>
+                <color>#d3c7c4</color>
+                <color>#d9d9d9</color>
+                <color>#9dcbe4</color>
+                <color>#8ec2df</color>
+                <color>#80b6d9</color>
+                <color>#73a8d0</color>
+                <color>#669bc7</color>
+                <color>#5c91bf</color>
+                <color>#5385b2</color>
+                <color>#487aa9</color>
+                <color>#3b6ea0</color>
+                <color>#306495</color>
+                <color>#2b5c8a</color>
+              </color-palette>
+            </encoding>
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[usr:% COM Y2Y Crime (copy)_5312488348791672834:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='has-stroke' value='false' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-line-first' value='true' />
+                <format attr='mark-labels-line-last' value='true' />
+                <format attr='mark-labels-range-min' value='true' />
+                <format attr='mark-labels-range-max' value='true' />
+                <format attr='mark-labels-mode' value='all' />
+                <format attr='mark-labels-range-scope' value='pane' />
+                <format attr='mark-labels-range-field' value='' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:Primary Type:nk]</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{69A1DFC0-47A5-4894-98FE-3523A3593F00}' />
+    </worksheet>
+    <worksheet name='Year Filter'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Crimes in Chicago Final Interview' name='federated.1weigfr03157ul1eu0dyt1bny3v7' />
+            <datasource name='Parameters' />
+          </datasources>
+          <datasource-dependencies datasource='Parameters'>
+            <column caption='Select Year' datatype='string' datatype-customized='true' name='[Parameter 1]' param-domain-type='list' role='measure' type='nominal' value='&quot;All&quot;'>
+              <calculation class='tableau' formula='&quot;All&quot;' />
+              <aliases>
+                <alias key='&quot;2014&quot;' value='2014 (Base Year)' />
+              </aliases>
+            </column>
+          </datasource-dependencies>
+          <datasource-dependencies datasource='federated.1weigfr03157ul1eu0dyt1bny3v7'>
+            <column caption='# Cases by ID' datatype='integer' name='[Calculation_3620049681770532864]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='{ FIXED [ID] : COUNT([__tableau_internal_object_id__].[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]) }' />
+            </column>
+            <column caption='3 Year Filter' datatype='boolean' name='[Calculation_3776760875100917760]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='If [Parameters].[Parameter 1] = &apos;All&apos; then TRUE&#10;Else&#10;YEAR([Date]) = INT([Parameters].[Parameter 1])&#10;END' />
+            </column>
+            <column datatype='datetime' name='[Date]' role='dimension' type='ordinal' />
+            <column datatype='integer' name='[ID]' role='dimension' type='ordinal' />
+            <column caption='Primary' datatype='table' name='[__tableau_internal_object_id__].[Crimes in Chicago Final Interview.csv_3D3D33FF491C4BCA99CCDB82879CD4A2]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_3776760875100917760]' derivation='None' name='[none:Calculation_3776760875100917760:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_3620049681770532864]' derivation='Sum' name='[sum:Calculation_3620049681770532864:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:Calculation_3776760875100917760:nk]'>
+            <groupfilter function='member' level='[none:Calculation_3776760875100917760:nk]' member='true' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.1weigfr03157ul1eu0dyt1bny3v7].[none:Calculation_3776760875100917760:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <text column='[federated.1weigfr03157ul1eu0dyt1bny3v7].[sum:Calculation_3620049681770532864:qk]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+      <simple-id uuid='{43DFC572-4388-4478-956B-D24C47CDA9BB}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' name='Year Filter'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card mode='list' param='[Parameters].[Parameter 1]' type='parameter' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{F1D73441-50DC-4BD0-85B6-21843BCACAE2}' />
+    </window>
+    <window class='worksheet' name='Chicago Map'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card mode='list' param='[Parameters].[Parameter 1]' type='parameter' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{F1A52FA6-729A-4735-90D0-35CFE998A1CD}' />
+    </window>
+    <window class='worksheet' name='Crime development by month'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{D5FAC2AC-8CBC-401D-8007-7D772E7B680F}' />
+    </window>
+    <window class='worksheet' maximized='true' name='What types of crime decreased?'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card mode='compact' param='[Parameters].[Parameter 1]' type='parameter' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{3A47EF15-C3A7-442C-BF78-5AC3298E4896}' />
+    </window>
+    <window class='worksheet' name='What types of crime increased?'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card mode='compact' param='[Parameters].[Parameter 1]' type='parameter' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <default-map-tool-selection tool='2' />
+      </viewpoint>
+      <simple-id uuid='{B0512786-E8F0-4E6D-A23E-795A924799DB}' />
+    </window>
+  </windows>
+</workbook>
